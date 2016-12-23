@@ -3,6 +3,8 @@
 #include "KeyboardState.h"
 #include "GameVariables.h"
 #include "Camera.h"
+#include "GameVariables.h"
+#include "GameMap.h"
 
 Game::Game() {
 
@@ -27,5 +29,7 @@ void Game::update(KeyboardState& key) {
 }
 
 void Game::draw(sf::RenderWindow& window) {
+    const Camera& camera = *data->camera;
 
+    data->gameMap->draw(window, camera);
 }

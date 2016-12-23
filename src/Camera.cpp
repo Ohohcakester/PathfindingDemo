@@ -19,7 +19,10 @@ void Camera::update(KeyboardState& key) {
     y += vy;
 }
 
-
+void Camera::absToRel(int& cx, int& cy) const {
+    cx = cx - x;
+    cy = y - cy;
+}
 
 
 

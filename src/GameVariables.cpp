@@ -8,7 +8,7 @@ GameVariables::~GameVariables() {
 }
 
 GameVariables::GameVariables() {
-    gameMap = new GameMap(500,500);
+    gameMap = new GameMap(100,80);
     camera = new Camera();
 }
 

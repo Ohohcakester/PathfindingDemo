@@ -11,6 +11,7 @@ public:
 
     Camera();
     void update(KeyboardState& key);
+    void absToRel(int& cx, int& cy) const;
 };
 
 

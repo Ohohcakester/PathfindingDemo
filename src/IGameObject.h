@@ -7,13 +7,14 @@ namespace sf {
     class RenderWindow;
 }
 class KeyboardState;
+class Camera;
 
 class IGameObject {
 public:
     float x, y;
 
-    virtual update(const KeyboardState& key) = 0;
-    virtual draw(sf::RenderWindow& window) = 0;
+    virtual void update(const KeyboardState& key) = 0;
+    virtual void draw(sf::RenderWindow& window, const Camera& camera) = 0;
 
     inline int gridX() {
         return std::round(x);
