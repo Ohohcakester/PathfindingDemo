@@ -53,5 +53,6 @@ void Controller::runMainLoop() {
 
         window.clear();
         draw();
+        window.display();
     }
 }
