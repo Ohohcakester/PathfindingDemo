@@ -9,7 +9,7 @@ class GameVariables;
 
 class Game {
 private:
-    GameVariables* data = nullptr;
+    GameVariables* gameVariables = nullptr;
 
 public:
     Game();

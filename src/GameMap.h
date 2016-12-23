@@ -15,7 +15,7 @@ public:
 
     GameMap();
     GameMap(int sizeX, int sizeY);
-    void draw(sf::RenderWindow& window, const Camera& camera);
+    void draw(sf::RenderWindow& window, const Camera& camera) const;
 };
 
 #endif

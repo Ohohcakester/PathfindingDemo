@@ -11,7 +11,7 @@ GameMap::GameMap(int sizeX, int sizeY)
     RandomGridGenerator::generateAutomataGrid(grid, 0.45f, 5, .35f);
 }
 
-void GameMap::draw(sf::RenderWindow& window, const Camera& camera) {
+void GameMap::draw(sf::RenderWindow& window, const Camera& camera) const {
     const int width = 10;
 
 

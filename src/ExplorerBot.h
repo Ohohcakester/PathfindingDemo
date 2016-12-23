@@ -6,8 +6,8 @@
 class ExplorerBot: public PathFollower {
 public:
     ExplorerBot(int x, int y);
-    virtual void update(const KeyboardState& key);
-    virtual void draw(sf::RenderWindow& window, const Camera& camera);
+    virtual void update(const KeyboardState& key, GameVariables& data);
+    virtual void draw(sf::RenderWindow& window, const Camera& camera) const;
 };
 
 #endif

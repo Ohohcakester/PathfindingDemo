@@ -11,25 +11,28 @@ Game::Game() {
 }
 
 Game::~Game() {
-    if (data != nullptr) delete data;
+    if (gameVariables != nullptr) delete gameVariables;
 }
 
 void Game::initialise() {
-    if (data != nullptr) {
-        delete data;
-        data = nullptr;
+    if (gameVariables != nullptr) {
+        delete gameVariables;
+        gameVariables = nullptr;
     }
-    data = new GameVariables();
+    gameVariables = new GameVariables();
 }
 
 void Game::update(KeyboardState& key) {
-    if (data == nullptr) return;
+    if (gameVariables == nullptr) return;
+    GameVariables& data = *gameVariables;
+    Camera& camera = *data.camera;
 
-    data->camera->update(key);
+    camera.update(key);
 }
 
 void Game::draw(sf::RenderWindow& window) {
-    const Camera& camera = *data->camera;
+    const GameVariables& data = *gameVariables;
+    const Camera& camera = *data.camera;
 
-    data->gameMap->draw(window, camera);
+    data.gameMap->draw(window, camera);
 }
