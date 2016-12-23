@@ -2,6 +2,7 @@
 #include "Game.h"
 #include "KeyboardState.h"
 #include "GameVariables.h"
+#include "Camera.h"
 
 Game::Game() {
 
@@ -20,7 +21,9 @@ void Game::initialise() {
 }
 
 void Game::update(KeyboardState& key) {
+    if (data == nullptr) return;
 
+    data->camera->update(key);
 }
 
 void Game::draw(sf::RenderWindow& window) {

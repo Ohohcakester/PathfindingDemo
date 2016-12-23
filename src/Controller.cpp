@@ -3,6 +3,7 @@
 #include "GameGlobals.h"
 
 Controller::Controller(): inGame(true), window(sf::VideoMode(RES_X, RES_Y), "Pathfinding Demo") {
+    game.initialise();
 }
 
 void Controller::processEvent(sf::Event event) {
