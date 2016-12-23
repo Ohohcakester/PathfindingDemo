@@ -1,4 +1,5 @@
 sfml/
+pathfinding/
 _build/
 build
 build.bat
