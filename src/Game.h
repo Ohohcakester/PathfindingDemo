@@ -1,19 +1,19 @@
 #ifndef _GAME_H_
 #define _GAME_H_
 
-#include "GameVariables.h"
-
 namespace sf {
     class RenderWindow;
 }
 class KeyboardState;
+class GameVariables;
 
 class Game {
 private:
-    GameVariables data;
+    GameVariables* data = nullptr;
 
 public:
     Game();
+    ~Game();
     void initialise();
     void update(KeyboardState& key);
     void draw(sf::RenderWindow& window);
