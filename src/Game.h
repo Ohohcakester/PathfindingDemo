@@ -1,19 +1,19 @@
 #ifndef _GAME_H_
 #define _GAME_H_
 
+#include "GameVariables.h"
 namespace sf {
     class RenderWindow;
 }
 class InputState;
-class GameVariables;
+
 
 class Game {
 private:
-    GameVariables* gameVariables = nullptr;
+    std::unique_ptr<GameVariables> gameVariables;
 
 public:
     Game();
-    ~Game();
     void initialise();
     void update(InputState& key);
     void draw(sf::RenderWindow& window);

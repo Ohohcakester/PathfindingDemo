@@ -1,6 +1,7 @@
 #include "GameMap.h"
 #include <Pathfinding/RandomGridGenerator.h>
 #include <Pathfinding/Grid.h>
+#include <Pathfinding/ENLSVGEdgeAlgorithm.h>
 #include <SFML/Graphics.hpp>
 #include "Camera.h"
 
@@ -9,6 +10,8 @@ GameMap::GameMap(): sizeX(1), sizeY(1), grid(1,1) {}
 GameMap::GameMap(int sizeX, int sizeY)
 : sizeX(sizeX), sizeY(sizeY), grid(sizeX, sizeY) {
     RandomGridGenerator::generateAutomataGrid(grid, 0.45f, 5, .35f);
+    algo.reset(new ENLSVG::Algorithm(grid));
+    memory.reset(new ENLSVG::Memory(algo->graph));
 }
 
 void GameMap::draw(sf::RenderWindow& window, const Camera& camera) const {

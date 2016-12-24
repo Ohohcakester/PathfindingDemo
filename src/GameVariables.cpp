@@ -2,13 +2,8 @@
 #include "GameMap.h"
 #include "Camera.h"
 
-GameVariables::~GameVariables() {
-    delete gameMap;
-    delete camera;
-}
-
 GameVariables::GameVariables() {
-    gameMap = new GameMap(100,80);
-    camera = new Camera();
+    gameMap.reset(new GameMap(100,80));
+    camera.reset(new Camera());
 }
 

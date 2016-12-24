@@ -10,16 +10,8 @@ Game::Game() {
 
 }
 
-Game::~Game() {
-    if (gameVariables != nullptr) delete gameVariables;
-}
-
 void Game::initialise() {
-    if (gameVariables != nullptr) {
-        delete gameVariables;
-        gameVariables = nullptr;
-    }
-    gameVariables = new GameVariables();
+    gameVariables.reset(new GameVariables());
 }
 
 void Game::update(InputState& key) {
