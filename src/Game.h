@@ -4,7 +4,7 @@
 namespace sf {
     class RenderWindow;
 }
-class KeyboardState;
+class InputState;
 class GameVariables;
 
 class Game {
@@ -15,7 +15,7 @@ public:
     Game();
     ~Game();
     void initialise();
-    void update(KeyboardState& key);
+    void update(InputState& key);
     void draw(sf::RenderWindow& window);
 };
 

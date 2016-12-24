@@ -6,7 +6,7 @@
 namespace sf {
     class RenderWindow;
 }
-class KeyboardState;
+class InputState;
 class Camera;
 class GameVariables;
 
@@ -14,7 +14,7 @@ class IGameObject {
 public:
     float x, y;
 
-    virtual void update(const KeyboardState& key, GameVariables& data) = 0;
+    virtual void update(const InputState& key, GameVariables& data) = 0;
     virtual void draw(sf::RenderWindow& window, const Camera& camera) const = 0;
 
     inline int gridX() {

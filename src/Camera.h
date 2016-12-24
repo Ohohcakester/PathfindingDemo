@@ -1,7 +1,7 @@
 #ifndef _CAMERA_H_
 #define _CAMERA_H_
 
-class KeyboardState;
+class InputState;
 
 class Camera {
 public:
@@ -10,7 +10,7 @@ public:
     int speed = 5;
 
     Camera();
-    void update(KeyboardState& key);
+    void update(InputState& key);
     void absToRel(int& cx, int& cy) const;
 };
 

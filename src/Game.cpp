@@ -1,6 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include "Game.h"
-#include "KeyboardState.h"
+#include "InputState.h"
 #include "GameVariables.h"
 #include "Camera.h"
 #include "GameVariables.h"
@@ -22,7 +22,7 @@ void Game::initialise() {
     gameVariables = new GameVariables();
 }
 
-void Game::update(KeyboardState& key) {
+void Game::update(InputState& key) {
     if (gameVariables == nullptr) return;
     GameVariables& data = *gameVariables;
     Camera& camera = *data.camera;

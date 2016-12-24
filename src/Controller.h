@@ -3,7 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "Game.h"
-#include "KeyboardState.h"
+#include "InputState.h"
 
 class Controller {
 private:
@@ -11,7 +11,7 @@ private:
     Game game;
 
     sf::RenderWindow window;
-    KeyboardState key;
+    InputState key;
 
     void processEvent(sf::Event event);
     void update();

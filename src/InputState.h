@@ -1,9 +1,9 @@
-#ifndef _KEYBOARD_STATE_H_
-#define _KEYBOARD_STATE_H_
+#ifndef _INPUT_STATE_H_
+#define _INPUT_STATE_H_
 
 #include <SFML/Graphics.hpp>
 
-class KeyboardState {
+class InputState {
 public:
     bool left = false;
     bool right = false;

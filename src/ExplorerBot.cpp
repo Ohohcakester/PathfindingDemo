@@ -7,7 +7,7 @@ ExplorerBot::ExplorerBot(int x, int y) {
     this->y = y;
 }
 
-void ExplorerBot::update(const KeyboardState& key, GameVariables& data) {
+void ExplorerBot::update(const InputState& key, GameVariables& data) {
 
 }
 

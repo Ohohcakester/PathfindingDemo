@@ -1,12 +1,12 @@
 #include "Camera.h"
-#include "KeyboardState.h"
+#include "InputState.h"
 #include <iostream>
 
 Camera::Camera(): x(0), y(0) {
 
 }
 
-void Camera::update(KeyboardState& key) {
+void Camera::update(InputState& key) {
     int vx = 0;
     int vy = 0;
 
