@@ -14,7 +14,11 @@ public:
     bool enter_click = false;
 
     bool leftmouse_click = false;
+    int leftMouseClickX;
+    int leftMouseClickY;
     bool rightmouse_click = false;
+    int rightMouseClickX;
+    int rightMouseClickY;
 
     inline void resetKeys() {
         space_click = false;
@@ -47,8 +51,18 @@ public:
 
     inline void mouseClick(sf::Mouse::Button button, int x, int y) {
         switch(button) {
-            case sf::Mouse::Left: leftmouse_click = true;
-            case sf::Mouse::Right: rightmouse_click = true;
+            case sf::Mouse::Left: {
+                leftmouse_click = true;
+                leftMouseClickX = x;
+                leftMouseClickY = y;
+                break;
+            }
+            case sf::Mouse::Right: {
+                rightmouse_click = true;
+                rightMouseClickX = x;
+                rightMouseClickY = y;
+                break;
+            }
         }
     }
 };
