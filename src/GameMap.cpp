@@ -29,7 +29,7 @@ void GameMap::draw(sf::RenderWindow& window, const Camera& camera) const {
         for (size_t x=0; x<sizeX; ++x) {
             if (grid.blocked[y][x]) {
                 int drawX = x * tileSize;
-                int drawY = y * tileSize;
+                int drawY = (y+1) * tileSize;
                 camera.absToRel(drawX, drawY);
                 shape.setPosition(drawX, drawY);
                 window.draw(shape);

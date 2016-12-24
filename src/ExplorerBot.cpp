@@ -33,7 +33,6 @@ void ExplorerBot::goToPosition(int destX, int destY, const GameMap& gameMap) {
 
     // Compute path in reverse.
     Path path = gameMap.getShortestPath(destX, destY, currX, currY);
-    std::cout << currX << " " << currY << " "<< destX << " " << destY << " " << path.size() << std::endl;
     remainingPath.swap(path);
     // last vertex in path should be (currX,currY). Don't need it.
     if (remainingPath.size() > 0) remainingPath.pop_back();
