@@ -12,6 +12,7 @@ public:
     Camera();
     void update(InputState& key);
     void absToRel(int& cx, int& cy) const;
+    void relToAbs(int& cx, int& cy) const;
 };
 
 

@@ -13,9 +13,15 @@ public:
     bool space_click = false;
     bool enter_click = false;
 
+    bool leftmouse_click = false;
+    bool rightmouse_click = false;
+
     inline void resetKeys() {
         space_click = false;
         enter_click = false;
+
+        leftmouse_click = false;
+        rightmouse_click = false;
     }
 
     inline void keyDown(sf::Keyboard::Key keyCode) {
@@ -36,6 +42,13 @@ public:
             case sf::Keyboard::Down: down = false; break;
             case sf::Keyboard::Left: left = false; break;
             case sf::Keyboard::Right: right = false; break;
+        }
+    }
+
+    inline void mouseClick(sf::Mouse::Button button, int x, int y) {
+        switch(button) {
+            case sf::Mouse::Left: leftmouse_click = true;
+            case sf::Mouse::Right: rightmouse_click = true;
         }
     }
 };

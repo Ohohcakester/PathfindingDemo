@@ -20,6 +20,10 @@ void Controller::processEvent(sf::Event event) {
             key.keyUp(event.key.code);
             break;
         }
+        case sf::Event::MouseButtonPressed: {
+            key.mouseClick(event.mouseButton.button, event.mouseButton.x, event.mouseButton.y);
+            break;
+        }
     }
 }
 
