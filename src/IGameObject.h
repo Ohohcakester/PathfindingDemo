@@ -12,10 +12,11 @@ class GameVariables;
 
 class IGameObject {
 public:
+    bool isActive = true;
     float x, y;
 
     virtual void update(const InputState& key, GameVariables& data) = 0;
-    virtual void draw(sf::RenderWindow& window, const Camera& camera) const = 0;
+    virtual void draw(sf::RenderWindow& window, const Camera& camera) = 0;
 
     inline int gridX() {
         return std::round(x);
@@ -23,6 +24,10 @@ public:
 
     inline int gridY() {
         return std::round(y);
+    }
+
+    void destroy() {
+        isActive = false;
     }
 };
 

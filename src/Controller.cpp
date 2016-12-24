@@ -29,6 +29,7 @@ void Controller::processEvent(sf::Event event) {
 
 void Controller::update() {
     game.update(key);
+    key.resetKeys();
 }
 
 void Controller::draw() {

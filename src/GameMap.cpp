@@ -15,6 +15,7 @@ GameMap::GameMap(int sizeX, int sizeY)
 }
 
 Path GameMap::getShortestPath(int sx, int sy, int ex, int ey) const {
+    if (sx < 0 || sy < 0 || sx > sizeX || sy > sizeY) return Path();
     return algo->computePath(*memory, sx, sy, ex, ey);
 }
 

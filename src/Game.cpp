@@ -5,6 +5,8 @@
 #include "Camera.h"
 #include "GameVariables.h"
 #include "GameMap.h"
+#include "IGameObject.h"
+#include "ExplorerBot.h"
 
 Game::Game() {
 
@@ -12,19 +14,55 @@ Game::Game() {
 
 void Game::initialise() {
     gameVariables.reset(new GameVariables());
+
+    GameVariables& data = *gameVariables;
+    data.gameObjects.push_back(new ExplorerBot(350,350));
 }
 
 void Game::update(InputState& key) {
     if (gameVariables == nullptr) return;
     GameVariables& data = *gameVariables;
     Camera& camera = *data.camera;
+    std::vector<IGameObject*>& gameObjects = data.gameObjects;
 
     camera.update(key);
+
+    size_t nActive = 0;
+    for (size_t i=0; i<gameObjects.size(); ++i) {
+        if (gameObjects[i]->isActive) {
+            gameObjects[i]->update(key, data);
+        } else {
+            ++nActive;
+        }
+    }
+
+    // less than half-full: reallocate gameObjects vector.
+    if (nActive*2 <= gameObjects.size()) {
+        std::vector<IGameObject*> newGameObjects;
+        // reserve, not resize. We have no guarantee that nActive remains the same after the update.
+        newGameObjects.reserve(nActive);
+
+        for (size_t i=0; i<gameObjects.size(); ++i) {
+            if (gameObjects[i]->isActive) {
+                newGameObjects.push_back(gameObjects[i]);
+            } else {
+                delete gameObjects[i];
+            }
+        }
+        gameObjects.swap(newGameObjects);
+    }
 }
 
 void Game::draw(sf::RenderWindow& window) {
     const GameVariables& data = *gameVariables;
     const Camera& camera = *data.camera;
+    const std::vector<IGameObject*>& gameObjects = data.gameObjects;
 
     data.gameMap->draw(window, camera);
+
+    for (size_t i=0; i<gameObjects.size(); ++i) {
+        if (gameObjects[i]->isActive) {
+            gameObjects[i]->draw(window, camera);
+        }
+    }
 }

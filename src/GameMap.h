@@ -25,12 +25,12 @@ public:
 
     Path getShortestPath(int sx, int sy, int ex, int ey) const;
 
-    inline void nearestGridCoordinate(int& cx, int& cy) {
+    inline void getNearestGridCoordinate(int& cx, int& cy) const {
         cx = (cx + tileSize/2) / tileSize;
         cy = (cy + tileSize/2) / tileSize;
     }
 
-    inline void gridToActual(int& cx, int& cy) {
+    inline void gridToActual(int& cx, int& cy) const {
         cx *= tileSize;
         cy *= tileSize;
     }

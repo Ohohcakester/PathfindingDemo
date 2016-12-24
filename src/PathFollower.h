@@ -4,14 +4,15 @@
 #include "IGameObject.h"
 #include "Pathfinding/PathfindingDataTypes.h"
 #include <vector>
+class GameMap;
 
 class PathFollower: public IGameObject {
-public:
-    float speed;
+protected:
+    float speed = 0;
     // Vertices of remainingPath are specified in reverse.
     std::vector<GridVertex> remainingPath;
 
-    void followPath();
+    void followPath(const GameMap& gameMap);
 };
 
 
