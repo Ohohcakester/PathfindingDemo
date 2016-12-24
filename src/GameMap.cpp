@@ -14,19 +14,21 @@ GameMap::GameMap(int sizeX, int sizeY)
     memory.reset(new ENLSVG::Memory(algo->graph));
 }
 
-void GameMap::draw(sf::RenderWindow& window, const Camera& camera) const {
-    const int width = 10;
+Path GameMap::getShortestPath(int sx, int sy, int ex, int ey) const {
+    return algo->computePath(*memory, sx, sy, ex, ey);
+}
 
+void GameMap::draw(sf::RenderWindow& window, const Camera& camera) const {
 
     sf::RectangleShape shape;
     shape.setFillColor(sf::Color::Green);
-    shape.setSize(sf::Vector2f(width, width));
+    shape.setSize(sf::Vector2f(tileSize, tileSize));
 
     for (size_t y=0; y<sizeY; ++y) {
         for (size_t x=0; x<sizeX; ++x) {
             if (grid.blocked[y][x]) {
-                int drawX = x * width;
-                int drawY = y * width;
+                int drawX = x * tileSize;
+                int drawY = y * tileSize;
                 camera.absToRel(drawX, drawY);
                 shape.setPosition(drawX, drawY);
                 window.draw(shape);
