@@ -10,9 +10,11 @@ GameMap::GameMap(): sizeX(1), sizeY(1), grid(1,1) {}
 
 GameMap::GameMap(int sizeX, int sizeY)
 : sizeX(sizeX), sizeY(sizeY), grid(sizeX, sizeY) {
-    RandomGridGenerator::generateAutomataGrid(grid, 0.45f, 5, .35f);
+    RandomGridGenerator::generateAutomataGrid(grid, 0.37f, 5, .1f);
     algo.reset(new ENLSVG::Algorithm(grid));
     memory.reset(new ENLSVG::Memory(algo->graph));
+
+    generateSprite();
 }
 
 Path GameMap::getShortestPath(int sx, int sy, int ex, int ey) const {
@@ -20,30 +22,36 @@ Path GameMap::getShortestPath(int sx, int sy, int ex, int ey) const {
     return algo->computePath(*memory, sx, sy, ex, ey);
 }
 
-void GameMap::draw(sf::RenderWindow& window, const Camera& camera) const {
+void GameMap::generateSprite() {
 
-    sf::RectangleShape shape;
-    shape.setFillColor(sf::Color::Green);
-    shape.setSize(sf::Vector2f(tileSize, tileSize));
+    mapTexture.create(sizeX, sizeY);
 
-    int x1 = 0, y1 = RES_Y, x2 = RES_X, y2 = 0;
-    camera.relToAbs(x1, y1);
-    camera.relToAbs(x2, y2);
-    x1 = std::max(0, x1/tileSize);
-    y1 = std::max(0, y1/tileSize);
-    x2 = std::min(sizeX, x2/tileSize + 1);
-    y2 = std::min(sizeY, y2/tileSize + 1);
+    // * 4 because pixels have 4 components (RGBA)
+    sf::Uint8* pixels = new sf::Uint8[sizeX * sizeY * 4];
 
-    for (int y=y1; y<y2; ++y) {
-        for (int x=x1; x<x2; ++x) {
-            if (grid.blocked[y][x]) {
-                int drawX = x * tileSize;
-                int drawY = (y+1) * tileSize;
-                camera.absToRel(drawX, drawY);
-                shape.setPosition(drawX, drawY);
-                window.draw(shape);
-            }
+    size_t base = 0;
+    for (size_t y=sizeY-1; y<sizeY; --y) {
+        for (size_t x=0; x<sizeX; ++x) {
+            const bool blocked = grid.blocked[y][x];
+            // Colour: Green.
+            pixels[base++] = 0;
+            pixels[base++] = blocked ? 255 : 0;
+            pixels[base++] = 0;
+            pixels[base++] = 255;
         }
     }
+
+    mapTexture.update(pixels);
+    delete[] pixels;
+    mapSprite.setTexture(mapTexture);
+    mapSprite.setOrigin(sf::Vector2f(0,sizeY));
+}
+
+void GameMap::draw(sf::RenderWindow& window, const Camera& camera) {
+    mapSprite.setScale(sf::Vector2f(tileSize,tileSize));
+    int baseX = 0, baseY = 0;
+    camera.absToRel(baseX, baseY);
+    mapSprite.setPosition(baseX, baseY);
+    window.draw(mapSprite);
 
 }

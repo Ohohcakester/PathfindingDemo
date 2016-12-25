@@ -1,13 +1,11 @@
 #ifndef _GAME_MAP_H_
 #define _GAME_MAP_H_
 
+#include <SFML/Graphics.hpp>
 #include <Pathfinding/Grid.h>
 #include <Pathfinding/PathfindingDataTypes.h>
 #include <Pathfinding/ENLSVGEdgeAlgorithm.h>
 #include <memory>
-namespace sf {
-    class RenderWindow;
-}
 class Camera;
 
 class GameMap {
@@ -16,12 +14,18 @@ public:
     const int sizeY;
     const int tileSize = 10;
     Grid grid;
+
+private:
     std::unique_ptr<ENLSVG::Algorithm> algo;
     std::unique_ptr<ENLSVG::Memory> memory;
 
+    sf::Sprite mapSprite;
+    sf::Texture mapTexture;
+
+public:
     GameMap();
     GameMap(int sizeX, int sizeY);
-    void draw(sf::RenderWindow& window, const Camera& camera) const;
+    void draw(sf::RenderWindow& window, const Camera& camera);
 
     Path getShortestPath(int sx, int sy, int ex, int ey) const;
 
@@ -34,6 +38,9 @@ public:
         cx *= tileSize;
         cy *= tileSize;
     }
+
+private:
+    void generateSprite();
 };
 
 #endif

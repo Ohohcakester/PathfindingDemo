@@ -4,7 +4,7 @@
 #include "IGameObject.h"
 
 GameVariables::GameVariables() {
-    gameMap.reset(new GameMap(300,300));
+    gameMap.reset(new GameMap(1500,1500));
     camera.reset(new Camera());
 }
 
