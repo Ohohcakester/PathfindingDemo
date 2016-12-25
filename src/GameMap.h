@@ -14,6 +14,7 @@ public:
     const int sizeY;
     const int tileSize = 10;
     Grid grid;
+    std::vector<GridVertex> coordinateList;
 
 private:
     std::unique_ptr<ENLSVG::Algorithm> algo;
@@ -41,6 +42,8 @@ public:
 
 private:
     void generateSprite();
+    void isolateLargestConnectedComponent();
+    void blockUpComponent(const std::vector<GridVertex>& component);
 };
 
 #endif

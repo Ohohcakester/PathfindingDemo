@@ -11,10 +11,103 @@ GameMap::GameMap(): sizeX(1), sizeY(1), grid(1,1) {}
 GameMap::GameMap(int sizeX, int sizeY)
 : sizeX(sizeX), sizeY(sizeY), grid(sizeX, sizeY) {
     RandomGridGenerator::generateAutomataGrid(grid, 0.37f, 5, .1f);
+    isolateLargestConnectedComponent();
     algo.reset(new ENLSVG::Algorithm(grid));
     memory.reset(new ENLSVG::Memory(algo->graph));
 
     generateSprite();
+}
+
+void GameMap::isolateLargestConnectedComponent() {
+    std::vector<std::vector<GridVertex>*> components;
+    std::vector<std::vector<bool>> visited;
+    visited.resize(sizeY+1);
+    for (size_t y=0;y<=sizeY;++y) visited[y].resize(sizeX+1, false);
+
+    for (size_t y=0;y<=sizeY;++y) {
+        for (size_t x=0;x<=sizeX;++x) {
+            if (visited[y][x]) continue;
+            if (grid.isBlocked(x-1,y-1) || grid.isBlocked(x,y-1) ||
+                grid.isBlocked(x-1,y) || grid.isBlocked(x,y)) continue;
+
+            std::vector<GridVertex>* componentPtr = new std::vector<GridVertex>();
+            std::vector<GridVertex>& component = *componentPtr;
+
+            // BFS
+            size_t index = 0;
+            component.push_back(GridVertex(x,y));
+            while (index < component.size()) {
+                int cx = component[index].x;
+                int cy = component[index].y;
+
+                bool blockedUL = grid.isBlocked(cx-1,cy-1);
+                bool blockedUR = grid.isBlocked(cx,cy-1);
+                bool blockedBL = grid.isBlocked(cx-1,cy);
+                bool blockedBR = grid.isBlocked(cx,cy);
+
+                // UP
+                if ((!blockedUL || !blockedUR) && (cy > 0 && !visited[cy-1][cx])) {
+                    component.push_back(GridVertex(cx,cy-1));
+                    visited[cy-1][cx] = true;
+                }
+
+                // DOWN
+                if ((!blockedBL || !blockedBR) && (cy < sizeY-1 && !visited[cy+1][cx])) {
+                    component.push_back(GridVertex(cx,cy+1));
+                    visited[cy+1][cx] = true;
+                }
+
+                // LEFT
+                if ((!blockedUL || !blockedBL) && (cx > 0 && !visited[cy][cx-1])) {
+                    component.push_back(GridVertex(cx-1,cy));
+                    visited[cy][cx-1] = true;
+                }
+
+                // RIGHT
+                if ((!blockedUR || !blockedBR) && (cx < sizeX-1 && !visited[cy][cx+1])) {
+                    component.push_back(GridVertex(cx+1,cy));
+                    visited[cy][cx+1] = true;
+                }
+
+                ++index;
+            }
+            components.push_back(componentPtr);
+        }
+    }
+
+    // Pick largest component.
+    int maxSize = -1;
+    int largestIndex = -1;
+    for (size_t i=0; i<components.size(); ++i) {
+        if ((int)components[i]->size() > maxSize) {
+            largestIndex = i;
+            maxSize = components[i]->size();
+        }
+    }
+
+    coordinateList.clear();
+    if (largestIndex != -1) coordinateList.swap(*components[largestIndex]);
+    // Block up all the other components. components[largestIndex] should be enpty.
+    for (size_t i=0; i<components.size(); ++i) {
+        blockUpComponent(*components[i]);
+    }
+
+    for (size_t i=0; i<components.size(); ++i) {
+        delete components[i];
+    }
+}
+
+// Turns all tiles around the selected component into blocked tiles.
+void GameMap::blockUpComponent(const std::vector<GridVertex>& component) {
+    for (size_t i=0; i<component.size(); ++i) {
+        int cx = component[i].x;
+        int cy = component[i].y;
+        for (int y = cy-1; y<=cy; ++y) {
+            for (int x = cx-1; x<=cx; ++x) {
+                if (!grid.isBlocked(x,y)) grid.setBlocked(x, y, true);
+            }
+        }
+    }
 }
 
 Path GameMap::getShortestPath(int sx, int sy, int ex, int ey) const {
