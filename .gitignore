@@ -3,3 +3,4 @@ pathfinding/
 _build/
 build
 build.bat
+*.o
