@@ -24,20 +24,6 @@ void ExplorerBot::update(const InputState& key, GameVariables& data) {
     followPath(*data.gameMap);
 }
 
-
-void ExplorerBot::goToPosition(int destX, int destY, const GameMap& gameMap) {
-    gameMap.getNearestGridCoordinate(destX, destY);
-    int currX = x;
-    int currY = y;
-    gameMap.getNearestGridCoordinate(currX, currY);
-
-    // Compute path in reverse.
-    Path path = gameMap.getShortestPath(destX, destY, currX, currY);
-    remainingPath.swap(path);
-    // last vertex in path should be (currX,currY). Don't need it.
-    if (remainingPath.size() > 0) remainingPath.pop_back();
-}
-
 void ExplorerBot::draw(sf::RenderWindow& window, const Camera& camera) {
     int drawX = x, drawY = y;
     camera.absToRel(drawX, drawY);

@@ -32,5 +32,22 @@ void PathFollower::followPath(const GameMap& gameMap) {
     }
 }
 
+void PathFollower::goToCoordinate(int destX, int destY, const GameMap& gameMap) {
+    int currX = x;
+    int currY = y;
+    gameMap.getNearestGridCoordinate(currX, currY);
+
+    // Compute path in reverse.
+    Path path = gameMap.getShortestPath(destX, destY, currX, currY);
+    remainingPath.swap(path);
+    // last vertex in path should be (currX,currY). Don't need it.
+    if (remainingPath.size() > 0) remainingPath.pop_back();
+}
+
+
+void PathFollower::goToPosition(int destX, int destY, const GameMap& gameMap) {
+    gameMap.getNearestGridCoordinate(destX, destY);
+    goToCoordinate(destX, destY, gameMap);
+}
 
 

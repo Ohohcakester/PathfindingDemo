@@ -15,8 +15,6 @@ public:
     virtual void draw(sf::RenderWindow& window, const Camera& camera);
 
 private:
-    void goToPosition(int destX, int destY, const GameMap& gameMap);
-
     int radius = 5;
     sf::CircleShape shape;
 };

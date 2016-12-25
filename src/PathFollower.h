@@ -13,6 +13,8 @@ protected:
     std::vector<GridVertex> remainingPath;
 
     void followPath(const GameMap& gameMap);
+    void goToCoordinate(int destX, int destY, const GameMap& gameMap);
+    void goToPosition(int destX, int destY, const GameMap& gameMap);
 };
 
 
