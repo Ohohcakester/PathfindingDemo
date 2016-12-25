@@ -52,13 +52,17 @@ void Controller::runMainLoop() {
 
         if (dTime > 5*frameTime) dTime = 5*frameTime;
 
+        bool updated = false;
         while (dTime > frameTime) {
             dTime -= frameTime;
             update();
+            updated = true;
         }
 
-        window.clear();
-        draw();
-        window.display();
+        if (updated) {
+            window.clear();
+            draw();
+            window.display();
+        }
     }
 }
