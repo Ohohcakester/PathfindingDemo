@@ -34,8 +34,8 @@ void GameMap::draw(sf::RenderWindow& window, const Camera& camera) const {
     x2 = std::min(sizeX, x2/tileSize + 1);
     y2 = std::min(sizeY, y2/tileSize + 1);
 
-    for (size_t y=y1; y<y2; ++y) {
-        for (size_t x=x1; x<x2; ++x) {
+    for (int y=y1; y<y2; ++y) {
+        for (int x=x1; x<x2; ++x) {
             if (grid.blocked[y][x]) {
                 int drawX = x * tileSize;
                 int drawY = (y+1) * tileSize;
