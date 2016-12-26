@@ -16,9 +16,9 @@ class IGameObject {
 private:
     bool idAlreadySet = false;
     GameObjectID id;
+    bool active = true;
 
 public:
-    bool isActive = true;
     float x, y;
 
     virtual void update(const InputState& key, GameVariables& data) = 0;
@@ -33,8 +33,10 @@ public:
     }
 
     void destroy() {
-        isActive = false;
+        active = false;
     }
+
+    inline bool isActive() {return active;}
 
     inline GameObjectID getId() {return id;}
 

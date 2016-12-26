@@ -29,7 +29,7 @@ void Game::update(InputState& key) {
 
     size_t nActive = 0;
     for (size_t i=0; i<gameObjects.size(); ++i) {
-        if (gameObjects[i]->isActive) {
+        if (gameObjects[i]->isActive()) {
             gameObjects[i]->update(key, data);
         } else {
             ++nActive;
@@ -50,7 +50,7 @@ void Game::draw(sf::RenderWindow& window) {
     data.gameMap->draw(window, camera);
 
     for (size_t i=0; i<gameObjects.size(); ++i) {
-        if (gameObjects[i]->isActive) {
+        if (gameObjects[i]->isActive()) {
             gameObjects[i]->draw(window, camera);
         }
     }

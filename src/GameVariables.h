@@ -32,7 +32,7 @@ public:
         newGameObjects.reserve(estimatedSize);
 
         for (size_t i=0; i<gameObjects.size(); ++i) {
-            if (gameObjects[i]->isActive) {
+            if (gameObjects[i]->isActive()) {
                 newGameObjects.push_back(gameObjects[i]);
             } else {
                 delete gameObjects[i];
@@ -71,7 +71,7 @@ public:
         if (it != idMap.end()) {
             ObjectIndex index = it->second;
             // it is guaranteed that index < gameOBjects.size()
-            if (gameObjects[index]->isActive) {
+            if (gameObjects[index]->isActive()) {
                 ref.index = index;
             } // else object is already destroyed.
         }
