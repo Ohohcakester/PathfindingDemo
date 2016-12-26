@@ -6,7 +6,6 @@
 #include "GameVariables.h"
 #include "GameMap.h"
 #include "IGameObject.h"
-#include "ExplorerBot.h"
 
 Game::Game() {
 
@@ -14,9 +13,7 @@ Game::Game() {
 
 void Game::initialise() {
     gameVariables.reset(new GameVariables());
-
-    GameVariables& data = *gameVariables;
-    data.createObject(new ExplorerBot(350,350));
+    gameManager.initialise(*gameVariables);
 }
 
 void Game::update(InputState& key) {
@@ -24,6 +21,8 @@ void Game::update(InputState& key) {
     GameVariables& data = *gameVariables;
     Camera& camera = *data.camera;
     std::vector<IGameObject*>& gameObjects = data.gameObjects;
+
+    gameManager.update(key, data);
 
     camera.update(key);
 

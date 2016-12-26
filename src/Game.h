@@ -2,6 +2,7 @@
 #define _GAME_H_
 
 #include "GameVariables.h"
+#include "GameManager.h"
 namespace sf {
     class RenderWindow;
 }
@@ -11,6 +12,7 @@ class InputState;
 class Game {
 private:
     std::unique_ptr<GameVariables> gameVariables;
+    const GameManager gameManager;
 
 public:
     Game();
