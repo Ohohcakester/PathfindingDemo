@@ -13,15 +13,6 @@ class GameMap;
 class Camera;
 class IGameObject;
 
-struct GameObjectRef {
-    const GameObjectID id;
-    ObjectIndex index;
-
-    GameObjectRef(GameObjectID id): id(id) {}
-    inline bool isValid() {return index != INVALID_INDEX;}
-    inline void makeInvalid() {index = INVALID_INDEX;}
-};
-
 class GameVariables {
 private:
     std::unordered_map<GameObjectID, ObjectIndex> idMap;
