@@ -40,6 +40,11 @@ public:
         cy *= tileSize;
     }
 
+    inline GridVertex getRandomOpenCoordinate() {
+        int index = rand()%coordinateList.size();
+        return coordinateList[index];
+    }
+
 private:
     void generateSprite();
     void isolateLargestConnectedComponent();

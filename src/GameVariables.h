@@ -23,6 +23,9 @@ public:
     std::unique_ptr<Camera> camera;
     std::vector<IGameObject*> gameObjects;
 
+    unsigned long long frame = 0;
+    int mineralCount;
+
     GameVariables();
     ~GameVariables();
 
