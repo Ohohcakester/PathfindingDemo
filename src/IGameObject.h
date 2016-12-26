@@ -3,6 +3,7 @@
 
 #include "DataTypes.h"
 #include <cmath>
+#include <iostream>
 
 namespace sf {
     class RenderWindow;
@@ -12,8 +13,11 @@ class Camera;
 class GameVariables;
 
 class IGameObject {
-public:
+private:
+    bool idAlreadySet = false;
     GameObjectID id;
+
+public:
     bool isActive = true;
     float x, y;
 
@@ -30,6 +34,14 @@ public:
 
     void destroy() {
         isActive = false;
+    }
+
+    inline GameObjectID getId() {return id;}
+
+    inline void setId(GameObjectID _id) {
+        if (idAlreadySet) std::cout << "ERROR: ID Already set!" << std::endl;
+        idAlreadySet = true;
+        this->id = _id;
     }
 };
 

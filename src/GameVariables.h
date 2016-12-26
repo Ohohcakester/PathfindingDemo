@@ -44,7 +44,7 @@ public:
         idMap.reserve(gameObjects.size());
         for (size_t i=0; i<gameObjects.size(); ++i) {
             // all gameobjects are guaranteed to be active now.
-            idMap[gameObjects[i]->id] = i;
+            idMap[gameObjects[i]->getId()] = i;
         }
     }
 
@@ -52,7 +52,7 @@ public:
         ObjectIndex index = gameObjects.size();
         GameObjectID id = nextAvailableID++;
 
-        gameObject->id = id;
+        gameObject->setId(id);
         gameObjects.push_back(gameObject);
         idMap[id] = index;
 
