@@ -12,6 +12,7 @@ protected:
     // Vertices of remainingPath are specified in reverse.
     std::vector<GridVertex> remainingPath;
 
+    virtual ~PathFollower() {}
     void followPath(const GameMap& gameMap);
     void goToCoordinate(int destX, int destY, const GameMap& gameMap);
     void goToPosition(int destX, int destY, const GameMap& gameMap);

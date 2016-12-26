@@ -21,6 +21,7 @@ private:
 public:
     float x, y;
 
+    virtual ~IGameObject() {}
     virtual void update(const InputState& key, GameVariables& data) = 0;
     virtual void draw(sf::RenderWindow& window, const Camera& camera) = 0;
 
