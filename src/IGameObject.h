@@ -1,6 +1,7 @@
 #ifndef _GAME_OBJECT_H_
 #define _GAME_OBJECT_H_
 
+#include "DataTypes.h"
 #include <cmath>
 
 namespace sf {
@@ -12,6 +13,7 @@ class GameVariables;
 
 class IGameObject {
 public:
+    GameObjectID id;
     bool isActive = true;
     float x, y;
 

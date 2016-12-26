@@ -16,7 +16,7 @@ void Game::initialise() {
     gameVariables.reset(new GameVariables());
 
     GameVariables& data = *gameVariables;
-    data.gameObjects.push_back(new ExplorerBot(350,350));
+    data.createObject(new ExplorerBot(350,350));
 }
 
 void Game::update(InputState& key) {
@@ -38,18 +38,7 @@ void Game::update(InputState& key) {
 
     // less than half-full: reallocate gameObjects vector.
     if (nActive*2 <= gameObjects.size()) {
-        std::vector<IGameObject*> newGameObjects;
-        // reserve, not resize. We have no guarantee that nActive remains the same after the update.
-        newGameObjects.reserve(nActive);
-
-        for (size_t i=0; i<gameObjects.size(); ++i) {
-            if (gameObjects[i]->isActive) {
-                newGameObjects.push_back(gameObjects[i]);
-            } else {
-                delete gameObjects[i];
-            }
-        }
-        gameObjects.swap(newGameObjects);
+        data.reallocateGameObjectsArray(nActive);
     }
 }
 
