@@ -19,7 +19,7 @@ namespace RetrieverBotState {
 
 class RetrieverBot: public PathFollower {
 public:
-    RetrieverBot(int x, int y);
+    RetrieverBot(int x, int y, GameObjectRef explorerBotRef);
     void goPickUp(GameObjectRef mineralRef, const GameVariables& data);
     virtual void update(const InputState& key, GameVariables& data);
     virtual void draw(sf::RenderWindow& window, const Camera& camera);

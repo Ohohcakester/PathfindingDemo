@@ -6,7 +6,8 @@
 #include "ExplorerBot.h"
 #include "Mineral.h"
 
-RetrieverBot::RetrieverBot(int x, int y) {
+RetrieverBot::RetrieverBot(int x, int y, GameObjectRef explorerBotRef)
+: explorerBotRef(explorerBotRef) {
     this->x = x;
     this->y = y;
     this->speed = 5;
