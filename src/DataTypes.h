@@ -8,9 +8,10 @@ typedef size_t ObjectIndex;
 
 extern const ObjectIndex INVALID_INDEX;
 struct GameObjectRef {
-    const GameObjectID id;
+    GameObjectID id;
     ObjectIndex index;
 
+    GameObjectRef(): id(0) {}
     GameObjectRef(GameObjectID id): id(id) {}
     inline bool isValid() {return index != INVALID_INDEX;}
     inline void makeInvalid() {index = INVALID_INDEX;}
