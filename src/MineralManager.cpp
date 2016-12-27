@@ -27,9 +27,9 @@ void MineralManager::initialise(GameVariables& data) {
 }
 
 void MineralManager::update(const InputState& key, GameVariables& data) {
-    const int maxMinerals = 100;
+    const int maxMinerals = 1000;
 
-    if (data.frame%120 == 0) {
+    if (data.frame%4 == 0) {
         if (minerals.size() < maxMinerals) {
             GridVertex pos = data.gameMap->getRandomOpenCoordinate();
             GameObjectID id = data.createObject(new Mineral(pos.x, pos.y, *data.gameMap));

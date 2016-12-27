@@ -9,6 +9,7 @@ public:
     bool right = false;
     bool up = false;
     bool down = false;
+    bool space = false;
 
     bool space_click = false;
     bool enter_click = false;
@@ -35,7 +36,7 @@ public:
             case sf::Keyboard::Left: left = true; break;
             case sf::Keyboard::Right: right = true; break;
 
-            case sf::Keyboard::Space: space_click = true; break;
+            case sf::Keyboard::Space: {space_click = true; space = true; break;}
             case sf::Keyboard::Return: enter_click = true; break;
         }
     }
@@ -46,6 +47,8 @@ public:
             case sf::Keyboard::Down: down = false; break;
             case sf::Keyboard::Left: left = false; break;
             case sf::Keyboard::Right: right = false; break;
+
+            case sf::Keyboard::Space: space = false; break;
         }
     }
 

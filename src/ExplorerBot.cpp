@@ -8,15 +8,15 @@
 ExplorerBot::ExplorerBot(int x, int y) {
     this->x = x;
     this->y = y;
-    this->speed = 4;
+    this->speed = 2;
 
-    shape.setFillColor(sf::Color::Yellow);
+    shape.setFillColor(sf::Color(255,127,0));
     shape.setRadius(radius);
     shape.setOrigin(radius, radius);
 }
 
 void ExplorerBot::update(const InputState& key, GameVariables& data) {
-    if (key.space_click) {
+    if (key.space) {
         auto mineralId = data.mineralManager.getRandomMineral();
         GameObjectRef minRef = data.getObjectReference(mineralId);
         GameObjectRef myRef = data.getObjectReference(this->getId());
