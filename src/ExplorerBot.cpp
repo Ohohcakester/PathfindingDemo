@@ -7,7 +7,7 @@
 ExplorerBot::ExplorerBot(int x, int y) {
     this->x = x;
     this->y = y;
-    this->speed = 5;
+    this->speed = 12;
 
     shape.setFillColor(sf::Color::Yellow);
     shape.setRadius(radius);
