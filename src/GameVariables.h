@@ -6,6 +6,7 @@
 #include "GameMap.h"
 #include "Camera.h"
 #include "IGameObject.h"
+#include "MineralManager.h"
 #include <memory>
 #include <vector>
 #include <unordered_map>
@@ -24,7 +25,7 @@ public:
     std::vector<IGameObject*> gameObjects;
 
     unsigned long long frame = 0;
-    int mineralCount;
+    MineralManager mineralManager;
 
     GameVariables();
     ~GameVariables();

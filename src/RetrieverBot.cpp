@@ -70,7 +70,7 @@ void RetrieverBot::update(const InputState& key, GameVariables& data) {
                 break;
             }
             case RetrieverBotState::carrying_mineral: {
-                --data.mineralCount;
+                data.mineralManager.removeMineral(targetMineralRef.id);
                 destroy();
                 return;
             }
