@@ -15,7 +15,7 @@ public:
     virtual void draw(sf::RenderWindow& window, const Camera& camera);
 
 private:
-    int radius = 5;
+    int radius = 12;
     sf::CircleShape shape;
 };
 
