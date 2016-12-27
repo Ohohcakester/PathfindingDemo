@@ -81,6 +81,11 @@ public:
         }
     }
 
+    inline IGameObject* getGameObject(GameObjectID id) const {
+        auto ref = getObjectReference(id);
+        return ref.index != INVALID_INDEX ? gameObjects[ref.index] : nullptr;
+    }
+
     inline IGameObject* getGameObject(GameObjectRef& ref) const {
         updateObjectReference(ref);
         return ref.index != INVALID_INDEX ? gameObjects[ref.index] : nullptr;

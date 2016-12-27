@@ -12,7 +12,7 @@ class MineralManager {
 
 public:
     GameObjectID getRandomMineral();
-    void removeMineral(GameObjectID id);
+    void removeMineral(GameObjectID id, GameVariables& data);
     void initialise(GameVariables& data);
     void update(const InputState& key, GameVariables& data);
 };
