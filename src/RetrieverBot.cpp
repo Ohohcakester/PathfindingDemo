@@ -58,15 +58,11 @@ void RetrieverBot::update(const InputState& key, GameVariables& data) {
         }
     }
 
-    const int repath_interval = 30;
-
     if (stoppedAndReachedDestination(destination, *data.gameMap)) {
         // OnReach
         switch(state) {
             case RetrieverBotState::go_to_collect: {
-                state = RetrieverBotState::carrying_mineral;
-                returningStartFrame = data.frame%repath_interval;
-                pathToExplorerBot(data);
+                onReachMineral(data);
                 break;
             }
             case RetrieverBotState::carrying_mineral: {
@@ -87,6 +83,12 @@ void RetrieverBot::update(const InputState& key, GameVariables& data) {
         }
     }
     followPath(*data.gameMap);
+}
+
+void RetrieverBot::onReachMineral(const GameVariables& data) {
+    state = RetrieverBotState::carrying_mineral;
+    returningStartFrame = data.frame%repath_interval;
+    pathToExplorerBot(data);
 }
 
 void RetrieverBot::pathToExplorerBot(const GameVariables& data) {

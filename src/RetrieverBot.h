@@ -25,13 +25,16 @@ public:
     virtual void draw(sf::RenderWindow& window, const Camera& camera);
 
 private:
-    int radius = 5;
+    const int radius = 5;
+    const int repath_interval = 30;
+    
     sf::CircleShape shape;
     RetrieverBotState::Enum state = RetrieverBotState::idle;
     GameObjectRef targetMineralRef;
     GameObjectRef explorerBotRef;
     int returningStartFrame;
 
+    void onReachMineral(const GameVariables& data);
     void pathToExplorerBot(const GameVariables& gameVariables);
 };
 
