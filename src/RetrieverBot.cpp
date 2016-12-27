@@ -85,6 +85,13 @@ void RetrieverBot::update(const InputState& key, GameVariables& data) {
 }
 
 void RetrieverBot::onReachMineral(const GameVariables& data) {
+    Mineral* mineral = data.getGameObject<Mineral>(targetMineralRef);
+    if (mineral->isTaken()) {
+        destroy();
+        return;
+    }
+
+    mineral->pickUp(getId(), data);
     state = RetrieverBotState::carrying_mineral;
     returningStartFrame = data.frame%repath_interval;
     pathToExplorerBot(data);
