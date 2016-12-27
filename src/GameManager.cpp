@@ -3,9 +3,15 @@
 #include "InputState.h"
 #include "ExplorerBot.h"
 #include "Mineral.h"
+#include "GameMap.h"
 
 void GameManager::initialise(GameVariables& data) const {
-    data.createObject(new ExplorerBot(350,350));
+    {
+        GridVertex coord = data.gameMap->getRandomOpenCoordinate();
+        int spawnX = coord.x, spawnY = coord.y;
+        data.gameMap->gridToActual(spawnX, spawnY);
+        data.createObject(new ExplorerBot(spawnX,spawnY));
+    }
 
     data.frame = 0;
 }
