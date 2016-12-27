@@ -6,6 +6,7 @@
 #include <Pathfinding/PathfindingDataTypes.h>
 #include <Pathfinding/ENLSVGEdgeAlgorithm.h>
 #include <memory>
+#include "RandomNumberGenerator.h"
 class Camera;
 
 class GameMap {
@@ -41,7 +42,7 @@ public:
     }
 
     inline GridVertex getRandomOpenCoordinate() {
-        int index = rand()%coordinateList.size();
+        int index = global_rng.index(coordinateList.size());
         return coordinateList[index];
     }
 

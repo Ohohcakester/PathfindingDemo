@@ -2,11 +2,12 @@
 #include "GameVariables.h"
 #include "GameMap.h"
 #include "Mineral.h"
+#include "RandomNumberGenerator.h"
 #include <stdlib.h>
 
 GameObjectID MineralManager::getRandomMineral() {
     int nMinerals = minerals.size();
-    size_t index = rand()%nMinerals;
+    size_t index = global_rng.index(nMinerals);
     return minerals[index];
 }
 
