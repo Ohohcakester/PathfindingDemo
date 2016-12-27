@@ -79,6 +79,16 @@ public:
             } // else object is already destroyed.
         }
     }
+
+    inline IGameObject* getGameObject(GameObjectRef& ref) const {
+        updateObjectReference(ref);
+        return ref.index != INVALID_INDEX ? gameObjects[ref.index] : nullptr;
+    }
+
+    inline bool gameObjectExists(GameObjectRef& ref) const {
+        updateObjectReference(ref);
+        return ref.index != INVALID_INDEX;
+    }
 };
 
 #endif
