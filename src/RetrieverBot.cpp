@@ -18,9 +18,8 @@ RetrieverBot::RetrieverBot(int x, int y, GameObjectRef explorerBotRef)
 }
 
 void RetrieverBot::goPickUp(GameObjectRef mineralRef, const GameVariables& data) {
-    IGameObject* gameObject = data.getGameObject(mineralRef);
-    if (gameObject == nullptr) return;
-    Mineral* mineral = static_cast<Mineral*>(gameObject);
+    Mineral* mineral = data.getGameObject<Mineral>(mineralRef);
+    if (mineral == nullptr) return;
     
     goToPosition(mineral->x, mineral->y, *data.gameMap);
     state = RetrieverBotState::go_to_collect;
@@ -35,8 +34,8 @@ void RetrieverBot::update(const InputState& key, GameVariables& data) {
     GridVertex destination;
     switch(state) {
         case RetrieverBotState::go_to_collect: {
-            if (data.gameObjectExists(targetMineralRef)) {
-                Mineral* mineral = static_cast<Mineral*>(data.getGameObject(targetMineralRef));
+            Mineral* mineral = data.getGameObject<Mineral>(targetMineralRef);
+            if (mineral != nullptr) {
                 destination = GridVertex(mineral->gridX, mineral->gridY);
             } else {
                 destroy();

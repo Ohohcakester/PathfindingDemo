@@ -21,7 +21,7 @@ void ExplorerBot::update(const InputState& key, GameVariables& data) {
         GameObjectRef minRef = data.getObjectReference(mineralId);
         GameObjectRef myRef = data.getObjectReference(this->getId());
         auto botId = data.createObject(new RetrieverBot(x, y, myRef));
-        static_cast<RetrieverBot*>(data.getGameObject(botId))->goPickUp(minRef, data);
+        (data.getGameObject<RetrieverBot>(botId))->goPickUp(minRef, data);
     }
 
     if (key.leftmouse_click) {
