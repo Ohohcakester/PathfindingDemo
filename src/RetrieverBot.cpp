@@ -18,7 +18,7 @@ RetrieverBot::RetrieverBot(int x, int y, GameObjectRef explorerBotRef)
 }
 
 void RetrieverBot::goPickUp(GameObjectRef mineralRef, const GameVariables& data) {
-    IGameObject* gameObject = data.getGameObject(targetMineralRef);
+    IGameObject* gameObject = data.getGameObject(mineralRef);
     if (gameObject == nullptr) return;
     Mineral* mineral = static_cast<Mineral*>(gameObject);
     

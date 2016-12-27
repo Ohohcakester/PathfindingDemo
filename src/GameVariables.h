@@ -66,6 +66,7 @@ public:
     inline GameObjectRef getObjectReference(GameObjectID id) const {
         GameObjectRef ref(id);
         updateObjectReference(ref);
+        return ref;
     }
 
     inline void updateObjectReference(GameObjectRef& ref) const {
