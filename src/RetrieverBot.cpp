@@ -77,8 +77,13 @@ void RetrieverBot::update(const InputState& key, GameVariables& data) {
         }
     } else {
         // Haven't reached.
-        if (data.frame%repath_interval == returningStartFrame) {
-            pathToExplorerBot(data);
+        switch(state) {
+            case RetrieverBotState::carrying_mineral: {
+                if (data.frame%repath_interval == returningStartFrame) {
+                    pathToExplorerBot(data);
+                }
+                break;
+            }
         }
     }
     followPath(*data.gameMap);
