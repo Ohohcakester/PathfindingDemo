@@ -9,6 +9,10 @@ public:
     bool right = false;
     bool up = false;
     bool down = false;
+    bool w = false;
+    bool a = false;
+    bool s = false;
+    bool d = false;
     bool space = false;
     bool z = false;
 
@@ -36,6 +40,10 @@ public:
             case sf::Keyboard::Down: down = true; break;
             case sf::Keyboard::Left: left = true; break;
             case sf::Keyboard::Right: right = true; break;
+            case sf::Keyboard::W: w = true; break;
+            case sf::Keyboard::A: a = true; break;
+            case sf::Keyboard::S: s = true; break;
+            case sf::Keyboard::D: d = true; break;
             case sf::Keyboard::Z: z = true; break;
 
             case sf::Keyboard::Space: {space_click = true; space = true; break;}
@@ -49,6 +57,10 @@ public:
             case sf::Keyboard::Down: down = false; break;
             case sf::Keyboard::Left: left = false; break;
             case sf::Keyboard::Right: right = false; break;
+            case sf::Keyboard::W: w = false; break;
+            case sf::Keyboard::A: a = false; break;
+            case sf::Keyboard::S: s = false; break;
+            case sf::Keyboard::D: d = false; break;
             case sf::Keyboard::Z: z = false; break;
 
             case sf::Keyboard::Space: space = false; break;
