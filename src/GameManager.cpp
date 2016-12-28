@@ -11,6 +11,9 @@ void GameManager::initialise(GameVariables& data) const {
         int spawnX = coord.x, spawnY = coord.y;
         data.gameMap->gridToActual(spawnX, spawnY);
         data.createObject(new ExplorerBot(spawnX,spawnY));
+
+        data.camera->x = spawnX;
+        data.camera->y = spawnY;
     }
 
     data.frame = 0;
