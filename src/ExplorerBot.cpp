@@ -17,11 +17,7 @@ ExplorerBot::ExplorerBot(int x, int y) {
 
 void ExplorerBot::update(const InputState& key, GameVariables& data) {
     if (key.space) {
-        auto mineralId = data.mineralManager.getRandomMineral();
-        GameObjectRef minRef = data.getObjectReference(mineralId);
-        GameObjectRef myRef = data.getObjectReference(this->getId());
-        auto botId = data.createObject(new RetrieverBot(x, y, myRef));
-        (data.getGameObject<RetrieverBot>(botId))->goPickUp(minRef, data);
+        retrieveRandomMineral(data);
     }
 
     if (key.leftmouse_click) {
@@ -31,6 +27,18 @@ void ExplorerBot::update(const InputState& key, GameVariables& data) {
         goToPosition(destX, destY, *data.gameMap);
     }
     followPath(*data.gameMap);
+}
+
+void ExplorerBot::retrieveRandomMineral(GameVariables& data) {
+    bool hasUnmarkedMineral;
+    auto mineralId = markedMinerals.getRandomUnmarkedMineral(hasUnmarkedMineral, data.mineralManager);
+    if (hasUnmarkedMineral) {
+        markedMinerals.markMineral(mineralId);
+        GameObjectRef minRef = data.getObjectReference(mineralId);
+        GameObjectRef myRef = data.getObjectReference(this->getId());
+        auto botId = data.createObject(new RetrieverBot(x, y, myRef));
+        (data.getGameObject<RetrieverBot>(botId))->goPickUp(minRef, data);
+    }
 }
 
 void ExplorerBot::draw(sf::RenderWindow& window, const Camera& camera) {

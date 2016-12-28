@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "PathFollower.h"
+#include "MarkedMinerals.h"
 class GameMap;
 class Camera;
 class GameVariables;
@@ -17,6 +18,9 @@ public:
 private:
     int radius = 12;
     sf::CircleShape shape;
+    MarkedMinerals markedMinerals;
+
+    void retrieveRandomMineral(GameVariables& data);
 };
 
 #endif

@@ -7,10 +7,10 @@ class GameVariables;
 class InputState;
 
 class MineralManager {
-
     std::vector<GameObjectID> minerals;
-
 public:
+    inline const std::vector<GameObjectID>& getMinerals() const {return minerals;}
+
     GameObjectID getRandomMineral();
     void removeMineral(GameObjectID id, GameVariables& data);
     void initialise(GameVariables& data);
