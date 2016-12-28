@@ -10,6 +10,7 @@ void Camera::update(InputState& key) {
     int vx = 0;
     int vy = 0;
 
+    int speed = key.z ? fastSpeed : slowSpeed;
     if (key.up) vy += speed;
     if (key.down) vy -= speed;
     if (key.left) vx -= speed;

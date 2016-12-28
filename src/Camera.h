@@ -7,7 +7,8 @@ class Camera {
 public:
     int x;
     int y;
-    int speed = 5;
+    int slowSpeed = 5;
+    int fastSpeed = 15;
 
     Camera();
     void update(InputState& key);
