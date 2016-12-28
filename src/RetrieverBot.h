@@ -34,7 +34,9 @@ private:
     GameObjectRef explorerBotRef;
     int returningStartFrame;
 
+    bool hasLineOfSightTo(GameObjectRef& ref, const GameVariables& data);
     void onReachMineral(const GameVariables& data);
+    void whileCarryingMineral(const GameVariables& data);
     void pathToExplorerBot(const GameVariables& gameVariables);
 };
 

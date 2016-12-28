@@ -41,9 +41,13 @@ public:
         cy *= tileSize;
     }
 
-    inline GridVertex getRandomOpenCoordinate() {
+    inline GridVertex getRandomOpenCoordinate() const {
         int index = global_rng.index(coordinateList.size());
         return coordinateList[index];
+    }
+
+    inline bool lineOfSight(int sx, int sy, int ex, int ey) const {
+        return grid.lineOfSight(sx, sy, ex, ey);
     }
 
 private:

@@ -74,10 +74,7 @@ void RetrieverBot::update(const InputState& key, GameVariables& data) {
         // Haven't reached.
         switch(state) {
             case RetrieverBotState::carrying_mineral: {
-                if (data.frame%repath_interval == returningStartFrame) {
-                    pathToExplorerBot(data);
-                }
-                break;
+                whileCarryingMineral(data);
             }
         }
     }
@@ -95,6 +92,24 @@ void RetrieverBot::onReachMineral(const GameVariables& data) {
     state = RetrieverBotState::carrying_mineral;
     returningStartFrame = data.frame%repath_interval;
     pathToExplorerBot(data);
+}
+
+void RetrieverBot::whileCarryingMineral(const GameVariables& data) {
+    if (hasLineOfSightTo(explorerBotRef, data) || 
+    data.frame%repath_interval == returningStartFrame) {
+        pathToExplorerBot(data);
+    }
+}
+
+bool RetrieverBot::hasLineOfSightTo(GameObjectRef& ref, const GameVariables& data) {
+    int x1 = x, y1 = y;
+    IGameObject* bot = data.getGameObject(ref);
+    int x2 = bot->x, y2 = bot->y;
+
+    const GameMap& gameMap = *data.gameMap;
+    gameMap.getNearestGridCoordinate(x1, y1);
+    gameMap.getNearestGridCoordinate(x2, y2);
+    return gameMap.lineOfSight(x1, y1, x2, y2);
 }
 
 void RetrieverBot::pathToExplorerBot(const GameVariables& data) {
