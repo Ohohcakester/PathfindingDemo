@@ -13,7 +13,7 @@ class GameMap {
 public:
     const int sizeX;
     const int sizeY;
-    const int tileSize = 1;
+    const int tileSize = 5;
     Grid grid;
     std::vector<GridVertex> coordinateList;
 

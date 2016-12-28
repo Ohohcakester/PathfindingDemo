@@ -26,7 +26,7 @@ public:
 
 private:
     const int radius = 5;
-    const int repath_interval = 30;
+    const int repath_interval = 20;
     
     sf::CircleShape shape;
     RetrieverBotState::Enum state = RetrieverBotState::idle;

@@ -10,7 +10,7 @@ RetrieverBot::RetrieverBot(int x, int y, GameObjectRef explorerBotRef)
 : explorerBotRef(explorerBotRef) {
     this->x = x;
     this->y = y;
-    this->speed = 5;
+    this->speed = 9;
 
     shape.setFillColor(sf::Color::Yellow);
     shape.setRadius(radius);

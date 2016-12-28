@@ -10,7 +10,7 @@ GameMap::GameMap(): sizeX(1), sizeY(1), grid(1,1) {}
 
 GameMap::GameMap(int sizeX, int sizeY)
 : sizeX(sizeX), sizeY(sizeY), grid(sizeX, sizeY) {
-    RandomGridGenerator::generateAutomataGrid(grid, 0.37f, 5, .1f);
+    RandomGridGenerator::generateAutomataGrid(grid, 0.37f, 5, .15f);
     isolateLargestConnectedComponent();
     algo.reset(new ENLSVG::Algorithm(grid));
     memory.reset(new ENLSVG::Memory(algo->graph));

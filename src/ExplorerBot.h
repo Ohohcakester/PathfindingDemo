@@ -16,7 +16,7 @@ public:
     virtual void draw(sf::RenderWindow& window, const Camera& camera);
 
 private:
-    int radius = 12;
+    int radius = 15;
     sf::CircleShape shape;
     MarkedMinerals markedMinerals;
 

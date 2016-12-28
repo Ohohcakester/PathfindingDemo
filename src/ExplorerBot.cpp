@@ -8,7 +8,7 @@
 ExplorerBot::ExplorerBot(int x, int y) {
     this->x = x;
     this->y = y;
-    this->speed = 2;
+    this->speed = 4;
 
     shape.setFillColor(sf::Color(255,127,0));
     shape.setRadius(radius);
@@ -16,7 +16,7 @@ ExplorerBot::ExplorerBot(int x, int y) {
 }
 
 void ExplorerBot::update(const InputState& key, GameVariables& data) {
-    if (key.space) {
+    if (true || key.space) {
         retrieveRandomMineral(data);
     }
 
