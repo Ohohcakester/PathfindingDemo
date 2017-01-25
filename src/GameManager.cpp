@@ -7,7 +7,7 @@
 
 void GameManager::initialise(GameVariables& data) const {
     {
-        GridVertex coord = data.gameMap->getRandomOpenCoordinate();
+        Pathfinding::GridVertex coord = data.gameMap->getRandomOpenCoordinate();
         int spawnX = coord.x, spawnY = coord.y;
         data.gameMap->gridToActual(spawnX, spawnY);
         data.createObject(new ExplorerBot(spawnX,spawnY));

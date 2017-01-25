@@ -1,7 +1,7 @@
 #include "GameMap.h"
 #include <Pathfinding/RandomGridGenerator.h>
 #include <Pathfinding/Grid.h>
-#include <Pathfinding/ENLSVGEdgeAlgorithm.h>
+#include <Pathfinding/ENLSVGAlgorithm.h>
 #include <SFML/Graphics.hpp>
 #include "Camera.h"
 #include "GameGlobals.h"
@@ -10,15 +10,17 @@ GameMap::GameMap(): sizeX(1), sizeY(1), grid(1,1) {}
 
 GameMap::GameMap(int sizeX, int sizeY)
 : sizeX(sizeX), sizeY(sizeY), grid(sizeX, sizeY) {
-    RandomGridGenerator::generateAutomataGrid(grid, 0.37f, 5, .15f);
+    Pathfinding::RandomGridGenerator::generateAutomataGrid(grid, 0.37f, 5, .15f);
     isolateLargestConnectedComponent();
-    algo.reset(new ENLSVG::Algorithm(grid));
-    memory.reset(new ENLSVG::Memory(algo->graph));
+    algo.reset(new Pathfinding::ENLSVG::Algorithm(grid));
+    memory.reset(new Pathfinding::ENLSVG::Memory(algo->graph));
 
     generateSprite();
 }
 
 void GameMap::isolateLargestConnectedComponent() {
+    using Pathfinding::GridVertex;
+
     std::vector<std::vector<GridVertex>*> components;
     std::vector<std::vector<bool>> visited;
     visited.resize(sizeY+1);
@@ -98,7 +100,7 @@ void GameMap::isolateLargestConnectedComponent() {
 }
 
 // Turns all tiles around the selected component into blocked tiles.
-void GameMap::blockUpComponent(const std::vector<GridVertex>& component) {
+void GameMap::blockUpComponent(const std::vector<Pathfinding::GridVertex>& component) {
     for (size_t i=0; i<component.size(); ++i) {
         int cx = component[i].x;
         int cy = component[i].y;
@@ -110,8 +112,8 @@ void GameMap::blockUpComponent(const std::vector<GridVertex>& component) {
     }
 }
 
-Path GameMap::getShortestPath(int sx, int sy, int ex, int ey) const {
-    if (sx < 0 || sy < 0 || sx > sizeX || sy > sizeY) return Path();
+Pathfinding::Path GameMap::getShortestPath(int sx, int sy, int ex, int ey) const {
+    if (sx < 0 || sy < 0 || sx > sizeX || sy > sizeY) return Pathfinding::Path();
     return algo->computePath(*memory, sx, sy, ex, ey);
 }
 

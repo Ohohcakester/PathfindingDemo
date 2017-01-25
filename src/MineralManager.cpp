@@ -31,7 +31,7 @@ void MineralManager::update(const InputState& key, GameVariables& data) {
 
     if (data.frame%1 == 0) {
         if (minerals.size() < maxMinerals) {
-            GridVertex pos = data.gameMap->getRandomOpenCoordinate();
+            Pathfinding::GridVertex pos = data.gameMap->getRandomOpenCoordinate();
             GameObjectID id = data.createObject(new Mineral(pos.x, pos.y, *data.gameMap));
             minerals.push_back(id);
         }

@@ -4,9 +4,10 @@
 #include <SFML/Graphics.hpp>
 #include <Pathfinding/Grid.h>
 #include <Pathfinding/PathfindingDataTypes.h>
-#include <Pathfinding/ENLSVGEdgeAlgorithm.h>
+#include <Pathfinding/ENLSVGAlgorithm.h>
 #include <memory>
 #include "RandomNumberGenerator.h"
+
 class Camera;
 
 class GameMap {
@@ -14,12 +15,12 @@ public:
     const int sizeX;
     const int sizeY;
     const int tileSize = 5;
-    Grid grid;
-    std::vector<GridVertex> coordinateList;
+    Pathfinding::Grid grid;
+    std::vector<Pathfinding::GridVertex> coordinateList;
 
 private:
-    std::unique_ptr<ENLSVG::Algorithm> algo;
-    std::unique_ptr<ENLSVG::Memory> memory;
+    std::unique_ptr<Pathfinding::ENLSVG::Algorithm> algo;
+    std::unique_ptr<Pathfinding::ENLSVG::Memory> memory;
 
     sf::Sprite mapSprite;
     sf::Texture mapTexture;
@@ -29,7 +30,7 @@ public:
     GameMap(int sizeX, int sizeY);
     void draw(sf::RenderWindow& window, const Camera& camera);
 
-    Path getShortestPath(int sx, int sy, int ex, int ey) const;
+    Pathfinding::Path getShortestPath(int sx, int sy, int ex, int ey) const;
 
     inline void getNearestGridCoordinate(int& cx, int& cy) const {
         cx = (cx + tileSize/2) / tileSize;
@@ -41,7 +42,7 @@ public:
         cy *= tileSize;
     }
 
-    inline GridVertex getRandomOpenCoordinate() const {
+    inline Pathfinding::GridVertex getRandomOpenCoordinate() const {
         int index = global_rng.index(coordinateList.size());
         return coordinateList[index];
     }
@@ -53,7 +54,7 @@ public:
 private:
     void generateSprite();
     void isolateLargestConnectedComponent();
-    void blockUpComponent(const std::vector<GridVertex>& component);
+    void blockUpComponent(const std::vector<Pathfinding::GridVertex>& component);
 };
 
 #endif

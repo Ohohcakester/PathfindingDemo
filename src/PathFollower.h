@@ -10,7 +10,7 @@ class PathFollower: public IGameObject {
 protected:
     float speed = 0;
     // Vertices of remainingPath are specified in reverse.
-    std::vector<GridVertex> remainingPath;
+    std::vector<Pathfinding::GridVertex> remainingPath;
 
     virtual ~PathFollower() {}
     void followPath(const GameMap& gameMap);
@@ -20,13 +20,13 @@ protected:
 public:
     inline bool stoppedMoving() const {return remainingPath.size() == 0;}
 
-    inline bool reachedDestination(GridVertex destination, const GameMap& gameMap) const {
+    inline bool reachedDestination(Pathfinding::GridVertex destination, const GameMap& gameMap) const {
         int px = x, py = y;
         gameMap.getNearestGridCoordinate(px, py);
         return (px == destination.x && py == destination.y);
     }
 
-    inline bool stoppedAndReachedDestination(GridVertex destination, const GameMap& gameMap) const {
+    inline bool stoppedAndReachedDestination(Pathfinding::GridVertex destination, const GameMap& gameMap) const {
         return stoppedMoving() && reachedDestination(destination, gameMap);
     }
 };

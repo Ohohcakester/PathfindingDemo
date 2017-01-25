@@ -7,7 +7,7 @@ void PathFollower::followPath(const GameMap& gameMap) {
     while (true) {
         // Case 0: Reached end of path. Break loop.
         if (remainingPath.size() <= 0) break;
-        const GridVertex& target = remainingPath.back();
+        const Pathfinding::GridVertex& target = remainingPath.back();
         int tx = target.x;
         int ty = target.y;
         gameMap.gridToActual(tx, ty);
@@ -38,7 +38,7 @@ void PathFollower::goToCoordinate(int destX, int destY, const GameMap& gameMap) 
     gameMap.getNearestGridCoordinate(currX, currY);
 
     // Compute path in reverse.
-    Path path = gameMap.getShortestPath(destX, destY, currX, currY);
+    auto path = gameMap.getShortestPath(destX, destY, currX, currY);
     remainingPath.swap(path);
     // last vertex in path should be (currX,currY). Don't need it.
     if (remainingPath.size() > 0) remainingPath.pop_back();

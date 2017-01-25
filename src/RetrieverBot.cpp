@@ -29,6 +29,7 @@ void RetrieverBot::goPickUp(GameObjectRef mineralRef, const GameVariables& data)
 
 void RetrieverBot::update(const InputState& key, GameVariables& data) {
     if (state == RetrieverBotState::idle) return;
+    using Pathfinding::GridVertex;
 
     // Verify destination
     GridVertex destination;
