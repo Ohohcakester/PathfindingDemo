@@ -2,9 +2,7 @@
 #define _GAME_MAP_H_
 
 #include <SFML/Graphics.hpp>
-#include <Pathfinding/Grid.h>
-#include <Pathfinding/PathfindingDataTypes.h>
-#include <Pathfinding/ENLSVGAlgorithm.h>
+#include <Pathfinding/ENLSVG.h>
 #include <memory>
 #include "RandomNumberGenerator.h"
 

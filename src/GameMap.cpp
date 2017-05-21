@@ -1,7 +1,5 @@
 #include "GameMap.h"
-#include <Pathfinding/RandomGridGenerator.h>
-#include <Pathfinding/Grid.h>
-#include <Pathfinding/ENLSVGAlgorithm.h>
+#include <Pathfinding/ENLSVG.h>
 #include <SFML/Graphics.hpp>
 #include "Camera.h"
 #include "GameGlobals.h"
@@ -13,8 +11,7 @@ GameMap::GameMap(int sizeX, int sizeY)
     Pathfinding::RandomGridGenerator::generateAutomataGrid(grid, 0.37f, 5, .15f);
     isolateLargestConnectedComponent();
     algo.reset(new Pathfinding::ENLSVG::Algorithm(grid));
-    memory.reset(new Pathfinding::ENLSVG::Memory(algo->graph));
-
+    memory.reset(new Pathfinding::ENLSVG::Memory(*algo));
     generateSprite();
 }
 

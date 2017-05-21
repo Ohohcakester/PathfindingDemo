@@ -16,7 +16,7 @@ ExplorerBot::ExplorerBot(int x, int y) {
 }
 
 void ExplorerBot::update(const InputState& key, GameVariables& data) {
-    if (true || key.space) {
+    if (key.space) {
         retrieveRandomMineral(data);
     }
 
