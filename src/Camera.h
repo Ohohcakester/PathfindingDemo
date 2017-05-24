@@ -1,7 +1,7 @@
 #ifndef _CAMERA_H_
 #define _CAMERA_H_
 
-#include "Gameglobals.h"
+#include "GameGlobals.h"
 class InputState;
 
 class Camera {
