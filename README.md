@@ -1,5 +1,7 @@
 # ENLSVG Pathfinding Demo
 
+![Demo Gif](https://cloud.githubusercontent.com/assets/5209333/26408031/4dcd5b54-40cf-11e7-842e-e43318cebe8d.gif)
+
 A sample application that makes use of ENLSVG-Pathfinding for fast any-angle path computation.
 
 Makes use of [SFML](https://www.sfml-dev.org/).
