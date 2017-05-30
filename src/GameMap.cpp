@@ -124,7 +124,7 @@ void GameMap::generateSprite() {
     size_t base = 0;
     for (size_t y=sizeY-1; y<sizeY; --y) {
         for (size_t x=0; x<sizeX; ++x) {
-            const bool blocked = grid.blocked[y][x];
+            const bool blocked = grid.isBlockedRaw(x, y);
             // Colour: Green.
             pixels[base++] = 0;
             pixels[base++] = blocked ? 255 : 0;
